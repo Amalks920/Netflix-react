@@ -1,35 +1,40 @@
-import { useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Body from './Body'
+import Home from './pages/Home'
+import { Outlet,createBrowserRouter } from 'react-router-dom'
+import NowPlayingMovieContext from '../utils/NowPlayingMovieContext'
+import { API_OPTIONS, NOW_PLAYING_MOVIES_URL } from '../utils/constants'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [nowPlayingMovies,setNowPlayingMovies]=useState([])
+
+  const fetchNowPlayingMovies=async ()=>{
+    const movieData=await fetch(NOW_PLAYING_MOVIES_URL, API_OPTIONS)
+    const parsedData=await movieData.json()
+     setNowPlayingMovies(parsedData.results)
+  }
+
+  useEffect(()=>{
+    fetchNowPlayingMovies()
+  },[])
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='overflow-hidden'>
+  <NowPlayingMovieContext.Provider value={nowPlayingMovies}>
+    <Body/>
+  </NowPlayingMovieContext.Provider>
+    </div>
   )
 }
+
+
+
+
 
 export default App

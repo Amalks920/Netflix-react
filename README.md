@@ -5,3 +5,18 @@ Welcome to the Netflix Clone project! This application aims to replicate the use
 # Project Overview
 
 In a world where streaming services have become an integral part of our entertainment routine, this project provides a unique opportunity to build a Netflix-inspired platform that can be customized and extended as per your needs. By utilizing the TMDb API, we gain access to a wealth of movie and TV show data, including posters, cast and crew information, release dates, and more.
+
+# Features
+  
+<!--
+#navbar
+    logo
+    navlinks
+    
+    
+#body
+    searchbar
+    cards
+
+#footer 
+ -->
